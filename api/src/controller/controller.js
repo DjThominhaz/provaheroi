@@ -6,10 +6,12 @@ const server=Router()
 server.post('/cadastro', async (req, resp)=>{
     try{
         const nome=req.body
+
         const resposta= await login(nome)
+        
         resp.send(resposta)
     }catch(err){
-        resp.status(404).send({erro: err.message})
+        resp.status(400).send({erro: err.message})
     }
 })
 

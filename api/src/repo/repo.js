@@ -7,13 +7,13 @@ export async function consulta(){
     return resposta
 }
 
-export async function login(novonome){
+export async function login(heroi){
     const comando = ` 
-    insert into TB_HEROI (NM_HEROI) VALUES (?)
-    insert into TB_HEROI (DS_PODER) VALUES (?)
-    insert into TB_HEROI (BT_VOA) VALUES (?)
+    insert into  TB_HEROI (NM_HEROI, DS_PODER, BT_VOA) 
+                            values (?, ?, ?)
     `
-    const [resposta] = await con.query(comando,[novonome.nome])
-    return resposta[0]
+    const [resposta] = await con.query(comando, [heroi.nome, heroi.poderes, heroi.voa]);
+    heroi.id= resposta.insertId;
+    return heroi;
 }
 
